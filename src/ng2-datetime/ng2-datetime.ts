@@ -5,6 +5,9 @@ import {
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ITimepickerEvent} from './ITimepickerEvent';
 
+declare var jQuery: any;
+declare var $: any;
+
 const CUSTOM_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NKDatetime),
@@ -16,7 +19,7 @@ const CUSTOM_ACCESSOR = {
     providers: [CUSTOM_ACCESSOR],
     template: `
         <div class="form-inline ng2-datetime">
-            <div [ngClass]="{ 'form-group': true, 'input-group': !datepickerOptions.hideIcon, 'date': true }">
+            <div style="width: 50%" [ngClass]="{ 'form-group': true, 'input-group': !datepickerOptions.hideIcon, 'date': true }">
                 <input id="{{idDatePicker}}" type="text" class="form-control"
                        [attr.readonly]="readonly"
                        [attr.required]="required"
@@ -31,7 +34,7 @@ const CUSTOM_ACCESSOR = {
                     <span [ngClass]="datepickerOptions.icon || 'glyphicon glyphicon-th'"></span>
                 </div>
             </div>
-            <div [ngClass]="{ 'form-group': true, 'input-group': !timepickerOptions.hideIcon, 'bootstrap-timepicker timepicker': true }">
+            <div style="width: 49%" [ngClass]="{ 'form-group': true, 'input-group': !timepickerOptions.hideIcon, 'bootstrap-timepicker timepicker': true }">
                 <input id="{{idTimePicker}}" type="text" class="form-control input-small"
                        [attr.readonly]="readonly"
                        [attr.required]="required"
@@ -49,7 +52,22 @@ const CUSTOM_ACCESSOR = {
         </div>
     `,
     styles: [
-        '.ng2-datetime *[hidden] { display: none; }'
+        `.ng2-datetime *[hidden] { display: none; }
+         datetime:focus{
+            border: none;
+            outline: none;
+         }
+         .datepicker table tr td.today, .datepicker table tr td.today:hover, .datepicker table tr td.today.disabled, .datepicker table tr td.today.disabled:hover {
+            background-color: #E6E6E6 !important;
+            background-image: linear-gradient(to bottom, #E6E6E6, #E6E6E6) !important;
+        }
+        .bootstrap-timepicker-widget input {
+            border-radius: 2px!important;;
+            border: 1px solid lightgray !important;;
+            padding: 5px !important;;
+            width: 40px !important;
+        }
+`
     ]
 })
 

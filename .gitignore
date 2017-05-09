@@ -11,3 +11,5 @@ src/polyfills.js
 src/polyfills.js.map
 src/vendor.js
 src/vendor.js.map
+
+.history/
